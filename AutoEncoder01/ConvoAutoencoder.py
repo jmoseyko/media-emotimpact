@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 Spyder Editor
-
-This is a temporary script file.
 """
 import tensorflow as tf
-#from ops import * #what does this do anyway?
 import numpy as np
 
 class ConvoAutoencoder(object):
 #Convolutional variational autoencoder
 
   def __init__(self, latent_dim = 10, batch_size = 50):
-    # apparently something wrong with the indentation here . . . 
-    # should I load the pretrained variables here? Or outside of this document/module?
+    # should I load the pretrained variables here? Or outside of this document/module? --> I'm doing it outside
     #VARIABLES
     self.latent_dim = latent_dim
     self.batch_size = batch_size
@@ -62,7 +58,6 @@ class ConvoAutoencoder(object):
     # calculate z, the decoder input
     self.samples = tf.random_normal([batch_size, latent_dim], 0, 1, dtype = tf.float32)
     self.z = self.z_mean + (tf.exp(.5*self.z_logstd) * self.samples) 
-    # I don't quite understand why we need to generate samples
 
     # fully connected layer
     # w_fc
@@ -97,10 +92,6 @@ class ConvoAutoencoder(object):
     # apply activation to outputs
     self.output_images = tf.nn.sigmoid(self.deconv_2)
 
-    # clean up outputs for plotting
-    #outputs_clean = self.output_images * 255
-    #outputs_clean = self.outputs_clean.astype(np.uint8)
-
 
   def train_step(self, sess, input_image_batch, learning_rate = 1e-3):
     # training info
@@ -127,7 +118,7 @@ class ConvoAutoencoder(object):
     return sess.run(optimizer, feed_dict={self.input_images: input_image_batch})
 
   def return_encoding(self, sess, input_frame):
-    # sess.run on self.z_mean?
+    # sess.run on self.z_mean? --> yeah, that works
     return sess.run(self.z_mean, feed_dict={self.input_images: input_frame})
 
   def reconstruct_image(self, sess, input_image):
