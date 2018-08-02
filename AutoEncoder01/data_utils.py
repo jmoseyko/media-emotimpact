@@ -66,7 +66,7 @@ def read_dataset(path, test_size):
 
 if __name__ == '__main__':
 	train_ds, test_ds = read_dataset('data/frames', 0.097)
-	print 'Shape:', train_ds.images().shape
-	print 'Shape:', test_ds.images().shape
-	print 'Memory size:', (train_ds.images().nbytes + test_ds.images().nbytes) / (1024.0 * 1024.0), 'MB'
-	print 'Batch shape:', train_ds.next_batch(100).shape
+	print('Shape:', train_ds.images().shape)
+	print('Shape:', test_ds.images().shape)
+	print('Memory size:', (train_ds.images().nbytes + test_ds.images().nbytes) / (1024.0 * 1024.0), 'MB')
+	print('Batch shape:', train_ds.next_batch(100).shape)
